@@ -1,0 +1,12 @@
+Package: NOISEtools
+Type: Package
+Title: Helpful tools for environmental noise measurements and research.
+Version: 0.1.0
+Author: Marloes Eeftens <marloes.eeftens@swisstph.ch>
+Maintainer: Marloes Eeftens <marloes.eeftens@swisstph.ch>
+Description: NOISEtools is a collection of functions which facilitate the import, cleaning, analysis, visualization and reporting of data from environmental noise measurements.
+License: GPL (>= 2)
+Depends: foreign
+Suggests: 
+Encoding: UTF-8
+LazyData: true
