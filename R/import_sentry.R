@@ -16,14 +16,14 @@ import_sentry=function(filename,timeformat,prefix){
   new_names<-c("id","LMax","LEQ","LMin")
 
   #1) Read the file:
-  try(dat<-read.csv(file=filename,header=TRUE,skip=2,sep=separators[1]),silent=TRUE)
+  try(dat<-read.csv(file=filename,header=TRUE,skip=1,blank.lines.skip=TRUE,sep=separators[1]),silent=TRUE)
   try(dat$id<-as.numeric(gsub("nsentry","",gsub("_.*","",read.csv(file=filename,nrows=1,header=FALSE)[1,1]))))
   if(dim(dat)[2]<3){
-    try(dat<-read.csv(file=filename,header=TRUE,skip=2,sep=separators[2]),silent=TRUE)
+    try(dat<-read.csv(file=filename,header=TRUE,skip=1,blank.lines.skip=TRUE,sep=separators[2]),silent=TRUE)
     try(dat$id<-as.numeric(gsub("nsentry","",gsub("_.*","",read.csv(file=filename,nrows=1,header=FALSE)[1,1]))))
   }
   if(dim(dat)[2]<3){
-    try(dat<-read.csv(file=filename,header=TRUE,skip=2,sep=separators[3]),silent=TRUE)
+    try(dat<-read.csv(file=filename,header=TRUE,skip=1,blank.lines.skip=TRUE,sep=separators[3]),silent=TRUE)
     try(dat$id<-as.numeric(gsub("nsentry","",gsub("_.*","",read.csv(file=filename,nrows=1,header=FALSE)[1,1]))))
   }
 
