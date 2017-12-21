@@ -9,10 +9,16 @@
   \item{prefix}{(Optional, no default) Sometimes it is handy to import the column names with a prefix (e.g. "SENTRY_") so they are unique within the dataframe if you want to use the time series to compare with another instrument. The result of specifying a prefix is that all columns in the imported dataset (except for PosixTime) are named (e.g. "SENTRY_") SENTRY_LMax, SENTRY_LEQ, etc.}
 }
 \details{}
-\value{The result is an R dataframe of your Sentry file which is ready to work with.}
-\references{}
+\value{The result is an R dataframe of your Sentry file  which is ready to work with and includes the variables:
+  \item{\code{PosixTime}}{POSIXct, date and time of each observation.}
+  \item{\code{id}}{character, the unique id number of the instrument used for the measurement.}
+  \item{\code{LMax}}{Maximum sound level in dB (A-weighted).}
+  \item{\code{LEQ}}{Equivalent continuous sound level in dB (A-weighted), also known as time average sound level or LAT.}
+  \item{\code{LMin}}{Minimum sound level in dB (A-weighted).}
+}
+\references{See the instrument producer's website for more information about the device: https://convergenceinstruments.com/pc/sound-level-meter-data-loggers/. See the following website for more information about A-weighting: http://www.acoustic-glossary.co.uk/frequency-weighting.htm.}
 \author{Marloes Eeftens, marloes.eeftens@swisstph.ch}
-\note{The Pulsar example .txt files are only available from within SwissTPH (sorry!). But chances are you have your own anyways! If not, just contact me.}
+\note{}
 \seealso{}
 \examples{
 #Write the example .csv to a folder of your choice (please change pathname!):
