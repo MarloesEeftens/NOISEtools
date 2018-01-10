@@ -1,8 +1,8 @@
 \name{sentry_example}
 \alias{sentry_example}
 \docType{data}
-\title{An example dataset as downloaded directly from an Sentry Noise Meter device as raw .csv data.}
-\description{This .csv dataset was downloaded from an ExpoM-RF device, chopped after 1min to minimize file size.}
+\title{An example dataset as downloaded directly from a Sentry Noise Meter device as raw .csv data.}
+\description{This .csv dataset was downloaded from an ExpoM-RF device which was sampling next to a busy road in Basel, Switzerland. The sampling interval was 1 second and the duration of the measurement was cut at 30min to minimize file size, yet give a real-world impression of the intermittancy ratio.}
 \usage{data("sentry_example")}
 \format{
   A data frame with 63 observations on the following variables.

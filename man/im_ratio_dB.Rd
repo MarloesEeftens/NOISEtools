@@ -32,8 +32,16 @@ my_sentry_file<-import_sentry(filename=my_filename)
 im_ratio_dB(my_sentry_file$LEQ)
 #Calculate the intermittancy ratio for 6 different levels of C.
 for (i in seq(1:6)){
-  im_i<-im_ratio_dB(x=my_sentry_file,L="LEQ",C=i,timevar="PosixTime",plot_filename=paste0("V:/EEH/R_functions/NOISEtools/plots/ir_",i,".png"))
-  print(paste0("C=",i,", Intermittancy Ratio=",round(im_i,1)))
+  stats<-im_ratio_dB(x=my_sentry_file,L="LEQ",C=i,timevar="PosixTime",plot_filename=paste0("V:/EEH/R_functions/NOISEtools/plots/ir_",i,".png"))
+  print(paste0("C=",i,", Intermittancy Ratio=",round(stats$IM_ratio,1)))
+}
+#See how the intermittancy ratio develops as we measure longer at the same spot.
+irs_cum=list()
+for(i in seq(1:1800)){irs_cum[[i]]<-im_ratio_dB(x=my_sentry_file[1:i,],timevar="PosixTime",L="LEQ")}
+irs_cum_df<-as.data.frame(do.call(rbind,irs_cum))
+ggplot(data=irs_cum_df,aes(x=N_obs,y=IM_ratio))+
+  geom_point()+
+  geom_hline(yintercept=tail(irs_cum_df$IM_ratio,1),color="blue")
 }
 }
 \keyword{}
