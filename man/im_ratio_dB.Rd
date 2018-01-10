@@ -43,5 +43,4 @@ ggplot(data=irs_cum_df,aes(x=N_obs,y=IM_ratio))+
   geom_point()+
   geom_hline(yintercept=tail(irs_cum_df$IM_ratio,1),color="blue")
 }
-}
 \keyword{}
