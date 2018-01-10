@@ -5,7 +5,7 @@
 #################################
 
 #Function im_ratio_dB:
-im_ratio_dB=function(x,C,timevar,L,plot_folder){
+im_ratio_dB=function(x,L,C,timevar,plot_filename){
 
   #0) Set defaults & parameters:
   if(missing(x)){stop("Please specify a dataframe or numeric vector for x...")}
@@ -18,10 +18,10 @@ im_ratio_dB=function(x,C,timevar,L,plot_folder){
     }
   }
   if(is.data.frame(x)&missing(L)){stop("Please specify which variable contains the sound level L.")}
-  # Check that the specified plot_folder actually exists
-  if(missing(plot_folder)==FALSE&dir.exists(plot_folder)==FALSE){message("Specified plot_folder does not exist. Time series plot will not be generated.")}
+  # Check that the specified plot_filename actually exists
+  if(missing(plot_filename)==FALSE&dir.exists(plot_filename)==FALSE){message("Specified plot_filename does not exist. Time series plot will not be generated.")}
   # You need the suggested package for this function
-  if(missing(plot_folder)==FALSE&!requireNamespace("ggplot2",quietly=TRUE)){
+  if(missing(plot_filename)==FALSE&!requireNamespace("ggplot2",quietly=TRUE)){
     stop("package ggplot2 is needed for this function to work. Please install it.")}
 
   #1) Average variables indicated for averaging:
@@ -50,7 +50,7 @@ im_ratio_dB=function(x,C,timevar,L,plot_folder){
   IM_ratio<-10^(0.1*(LEQ_T_events-LEQ_T_tot))*100
 
   #5) If plots are desired, plot the time series:
-  if(missing(plot_folder)==FALSE){
+  if(missing(plot_filename)==FALSE){
     if(is.vector(x)){dat$PosixTime<-seq(1:dim(dat)[1])}
     interval<-dat$PosixTime[2]-dat$PosixTime[1]
     xmin<-dat$PosixTime[dat$exc_1st!=0]
@@ -64,9 +64,9 @@ im_ratio_dB=function(x,C,timevar,L,plot_folder){
       #theme(title=text_b,axis.title=text_s,axis.text=text_s,legend.text=text_s,legend.title=element_blank(),legend.position="bottom")+
       ylim(min(dat$x_new)/1.1,max(dat$x_new)*1.1)+
       labs(x="",y="Sound level in dB[A]")+
-      ggtitle(bquote(list(IR==.(IM_ratio),Events==.(N_events),L[eq_T_tot]==.(LEQ_T_tot),L[eq_T_events]==.(LEQ_T_events))))+
+      ggtitle(bquote(list(IR==.(round(IM_ratio,1)),Events==.(N_events),L[eq_T_tot]==.(round(LEQ_T_tot,1)),L[eq_T_events]==.(round(LEQ_T_events,1)),C==.(C))))+
       theme_bw()
-    ggsave(paste0(plot_folder,"im_",i,".png"),plot=p1,units="cm",dpi=600,width=20,height=10)
+    ggsave(paste0(plot_filename,".png"),plot=p1,units="cm",dpi=600,width=20,height=10)
   }
 
   #6) Return intermittancy ratio:
