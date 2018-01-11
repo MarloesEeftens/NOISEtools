@@ -4,9 +4,9 @@ Title: Helpful tools for environmental noise measurements and research.
 Version: 0.1.0
 Author: Marloes Eeftens <marloes.eeftens@swisstph.ch>
 Maintainer: Marloes Eeftens <marloes.eeftens@swisstph.ch>
-Description: NOISEtools is a collection of functions which facilitate the import, cleaning, analysis, visualization and reporting of data from environmental noise measurements.
+Description: NOISEtools is a collection of functions which facilitate the import, cleaning, analysis, visualization and reporting of data from environmental noise measurements. The ones I have worked with so far are the Pulsar (https://pulsarinstruments.com/news-detail/pulsar-model-30-sound-investment-for-measuring-industrial-noise/) and the Sentry (https://convergenceinstruments.com/pc/sound-level-meter-data-loggers/)
 License: GPL (>= 2)
 Depends: foreign
-Suggests: 
+Suggests: ggplot2
 Encoding: UTF-8
 LazyData: true

@@ -1,6 +1,6 @@
 \name{im_ratio_dB}
 \alias{im_ratio_dB}
-\title{"Calculates the intermittancy ratio for a time series of sound levels expressed in dB"}
+\title{"Calculates the intermittancy ratio and several other statistics for a time series of sound levels expressed in dB"}
 \description{Given a time series of sound levels as a numeric vector or variable within a dataframe, this function calculates the intermittancy ratio based on the measured sound levels.}
 \usage{im_ratio_dB(x,L,C,timevar,plot_filename)}
 \arguments{
@@ -30,11 +30,13 @@ my_sentry_file<-import_sentry(filename=my_filename)
 
 #Calculate the intermittancy ratio over the variable "LEQ"
 im_ratio_dB(my_sentry_file$LEQ)
-#Calculate the intermittancy ratio for 6 different levels of C.
+
+#Calculate and plot the intermittancy ratio for 6 different levels of C (requires library ggplot2!).
 for (i in seq(1:6)){
   stats<-im_ratio_dB(x=my_sentry_file,L="LEQ",C=i,timevar="PosixTime",plot_filename=paste0("V:/EEH/R_functions/NOISEtools/plots/ir_",i,".png"))
   print(paste0("C=",i,", Intermittancy Ratio=",round(stats$IM_ratio,1)))
 }
+
 #See how the intermittancy ratio develops as we measure longer at the same spot.
 irs_cum=list()
 for(i in seq(1:1800)){irs_cum[[i]]<-im_ratio_dB(x=my_sentry_file[1:i,],timevar="PosixTime",L="LEQ")}
