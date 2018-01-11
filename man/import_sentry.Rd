@@ -1,6 +1,6 @@
 \name{import_sentry}
 \alias{import_sentry}
-\title{"import_pulsar" is an import function for Sentry Noise meter files, saved in txt format.}
+\title{"import_sentry" is an import function for Sentry Noise meter files, saved in txt format.}
 \description{Given the pathname of a file downloaded from the Sentry sound level meter, this function imports the speficied file into the R environment as a dataframe.}
 \usage{import_sentry(filename,timeformat,prefix)}
 \arguments{
