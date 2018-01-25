@@ -1,6 +1,6 @@
 \name{im_ratio_dB}
 \alias{im_ratio_dB}
-\title{"Calculates the intermittancy ratio and several other statistics for a time series of sound levels expressed in dB"}
+\title{"Calculates the intermittancy ratio (in percentage) and several other statistics for a time series of sound levels expressed in dB"}
 \description{Given a time series of sound levels as a numeric vector or variable within a dataframe, this function calculates the intermittancy ratio based on the measured sound levels.}
 \usage{im_ratio_dB(x,L,C,timevar,plot_filename)}
 \arguments{
@@ -19,7 +19,7 @@ Journal of Exposure Science and Environmental Epidemiology (2016) 26, 575–585 
 doi:10.1038/jes.2015.56
 }
 \author{Marloes Eeftens, marloes.eeftens@swisstph.ch}
-\note{}
+\note{The intermittancy ratio was conceived to be calculated over a time series of sound measurements with measurement interval 1 second. In the referenced paper, separate statistics were calculated over each hour of the day (e.g. for 1-second data from 12:00:00 to 12:59:59, then from 13:00:00 to 13:59:59, etc). While it is possible to calculate the intermittancy ratio measured over measurement time series with a different interval than 1 second, be conscious that this is not how the statistic was conceived. It is also possible to calculate the imtermittancy ratio over shorter or longer periods than 1 hour, but be aware that during long measurements (e.g. over the course of a 24-hour day), the "background" noise level (above which the threshold for events "K" is calculated) changes, which prevents the accurate identification of events. Calculating an IM ratio over shorter periods will work as well, but be aware of the random noise (literally!) in short time series: short time series give you unstable estimates of both Leq and the IM ratio. This is demonstrated in the 3rd example below: in this particular example, the estimation of IM ratio stabilizes after approximately 15 minutes of measuring at the same spot.}
 \seealso{}
 \examples{
 #Write the example .csv to a folder of your choice (please change pathname!):
@@ -34,7 +34,7 @@ im_ratio_dB(my_sentry_file$LEQ)
 #Calculate and plot the intermittancy ratio for 6 different levels of C (requires library ggplot2!).
 for (i in seq(1:6)){
   stats<-im_ratio_dB(x=my_sentry_file,L="LEQ",C=i,timevar="PosixTime",plot_filename=paste0("V:/EEH/R_functions/NOISEtools/plots/ir_",i,".png"))
-  print(paste0("C=",i,", Intermittancy Ratio=",round(stats$IM_ratio,1)))
+  print(paste0("C=",i,", Intermittancy Ratio=",round(stats[["IM_ratio"]])))
 }
 
 #See how the intermittancy ratio develops as we measure longer at the same spot.

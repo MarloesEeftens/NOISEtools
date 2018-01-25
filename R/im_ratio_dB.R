@@ -60,7 +60,7 @@ im_ratio_dB=function(x,L,C,timevar,plot_filename){
     xmax<-dat$PosixTime[dat$exc_last!=0]
     if(length(xmax)<length(xmin)){xmax<-c(xmax,tail(dat$PosixTime,1))}
     p1<-ggplot(data=dat,aes(x=PosixTime,y=x_new))+
-      annotate("rect",xmin=xmin,xmax=xmax,ymin=min(dat$x_new)/1.1,ymax=max(dat$x_new)*1.1,fill="grey")+
+      annotate("rect",xmin=xmin,xmax=xmax,ymin=min(dat$x_new)/1.03,ymax=max(dat$x_new)*1.03,fill="grey")+
       geom_line(color="grey20")+
       geom_hline(yintercept=LEQ_T_tot,color="green")+
       geom_hline(yintercept=K,color="red")+
