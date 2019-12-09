@@ -5,11 +5,11 @@
 #################################
 
 #Function im_ratio_dB:
-im_ratio_dB=function(x,L,C,timevar,plot_filename){
+im_ratio_dB=function(x,L,C=3,timevar,plot_filename){
 
   #0) Set defaults & parameters:
   if(missing(x)){stop("Please specify a dataframe or numeric vector for x...")}
-  if(missing(C)){C<-3} #C is 3dB by default following paper by Wunderli et al. (2016)
+  #C is 3dB by default following paper by Wunderli et al. (2016)
   is.POSIXct<-function(x)inherits(x,"POSIXct")
   if(is.data.frame(x)){
     if(missing(timevar)&sum(sapply(x,is.POSIXct))==1){
@@ -67,10 +67,9 @@ im_ratio_dB=function(x,L,C,timevar,plot_filename){
       ylim(min(dat$x_new)/1.03,max(dat$x_new)*1.03)+
       labs(x="",y="Sound level in dB[A]")+
       geom_curve(aes(x=dat$PosixTime[dim(dat)[1]/50],xend=dat$PosixTime[dim(dat)[1]/50],y=LEQ_T_tot,yend=K),colour="lightblue",lwd=1)+
-      geom_label(aes(x=dat$PosixTime[1],y=LEQ_T_tot,label =bquote("L[eq_T_tot]")),size=3,vjust="top",fill="green",parse=TRUE)+
-      geom_label(aes(x=dat$PosixTime[1],y=K,label="K"),size=3,vjust="bottom",fill="red",parse=TRUE)+
-      geom_label(aes(x=dat$PosixTime[dim(dat)[1]/25],y=(K+LEQ_T_tot)/2,label="C"),size=3,fill="lightblue")+
-      #annotate("text",x=dat$PosixTime[1],y=,label="C (offset)",hjust=0,fill="white")+
+      annotate(geom="label",x=dat$PosixTime[1],y=LEQ_T_tot,label=bquote("L[eq_T_tot]"),size=3,vjust="top",fill="green",parse=TRUE)+
+      annotate(geom="label",x=dat$PosixTime[1],y=K,label=bquote("K"),size=3,vjust="bottom",fill="red",parse=TRUE)+
+      annotate(geom="label",x=dat$PosixTime[dim(dat)[1]/25],y=(K+LEQ_T_tot)/2,label=bquote("C"),size=3,fill="lightblue",parse=TRUE)+
       ggtitle(bquote(list(IR==.(round(IM_ratio,1)),Events==.(N_events),L[eq_T_tot]==.(round(LEQ_T_tot,1)),K==.(round(K,1)),L[eq_T_events]==.(round(LEQ_T_events,1)),C==.(C))))+
       theme_bw()
     ggsave(plot_filename,plot=p1,units="cm",dpi=600,width=20,height=10)
